@@ -24,7 +24,7 @@ if not sb3Path.is_file():
 sb3Dir = sb3Path.parent
 
 with ZipFile(sb3Path, 'r') as zipFile:
-    sb3Data = loads(zipFile.read("project.json", ))
+    sb3Data = loads(zipFile.read("project.json"))
 
     for sprite in sb3Data['targets']:
         targetFolder = Validate(sprite['name'])
