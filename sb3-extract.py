@@ -8,13 +8,17 @@ def Validate(filename):
 
 def ExtractAssets(assetType):
     for asset in sprite[assetType]:
+        assetFile = Validate(asset['md5ext'])
         targetFile = Validate(asset['name'] + '.' + asset['dataFormat'])
-        zipFile.extract(asset['assetId'] + '.' + asset['dataFormat'], sb3Dir / targetFolder / targetFile)
+        zipFile.extract(asset['assetId'] + '.' + asset['dataFormat'], sb3Dir / targetFolder)
+        Path(sb3Dir / targetFolder / assetFile).replace(sb3Dir / targetFolder / targetFile)
 
 if len(sys.argv) != 2:
-    sys.exit("Syntax: sb3-extract <file.sb3>")
+    sb3File = input("Enter sb3 file's path:")
+else:
+    sb3File = sys.argv[1]
 
-sb3Path = Path(sys.argv[1])
+sb3Path = Path(sb3File)
 if not sb3Path.is_file():
     sys.exit("File \"" + sb3Path.name + "\" does not exist")
 sb3Dir = sb3Path.parent
